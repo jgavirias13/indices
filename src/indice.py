@@ -1,14 +1,8 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
-from pymongo import MongoClient
 import os
 import unicodedata
 import string, re
-
-mongoclient = MongoClient('localhost',27017)
-db = mongoclient.jgaviri6
-coleccion = db.palabras
-
 
 def eliminarTildes(cadena):
     s = ''.join((c for c in unicodedata.normalize('NFD',unicode(cadena)) if unicodedata.category(c) != 'Mn'))
@@ -34,8 +28,8 @@ class Contador(MRJob):
         documentos = sorted(l)
         if len(documentos) > 5:
             documentos = [l[0],l[1],l[2],l[3],l[4]]
-        coleccion.insert({"palabra":word,"documentos":l})
-        yield word,l
+        for documento in documentos:
+            yield word,documento
     
     def steps(self):
         return [
