@@ -22,10 +22,24 @@
   if($conn -> connect_error){
     die("Conexion a base de datos ha fallado: " . $conn -> connect_error);
   }
-  
+
+  function separar_palabras($cadena){
+    $texto = explode(" ",$cadena);
+    return $texto;
+  }
   
   $palabra = eliminar_tildes($palabras);
-  $query = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE word = \"".$palabra."\"";
+  $palabraArray = separar_palabras($palabra); 
+  $querystring = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE"; 
+  $tamano = count($palabraArray);
+  for($i=0;$i<$tamano;$i++){
+    $querystring .= " word = \"".$palabraArray[$i]."\"";
+    if($i<$tamano-1){
+      $querystring .= " or";
+    }
+  }
+  echo $querystring;
+  $query = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE word = \"".$palabra."\" ORDER BY cantidad DESC";
   $result = mysqli_query($conn, $query);
   echo "Palabra: ".$palabra."<br>";
   if(mysqli_num_rows($result)> 0)  {
