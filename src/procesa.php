@@ -21,6 +21,8 @@
   $conn = new mysqli($servername, $username, $password, $dbname, 3306);
   if($conn -> connect_error){
     die("Conexion a base de datos ha fallado: " . $conn -> connect_error);
+  }else{
+    echo '<script> alert("Hola mundo");</script>'
   }
   
   $palabra = eliminar_tildes($palabras);
