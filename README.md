@@ -10,10 +10,15 @@ David Alejandro Gomez
 1. Diseño del sistema
 
 	1.1. Herramientas usadas
+
 	1.2. Algoritmos usados
+
 2. Proceso ETL
+
 	2.1. Extracción de datos
+
 	2.2. Transformación de datos
+
 	2.3. Carga de datos
 
 ## Diseño del sistema
