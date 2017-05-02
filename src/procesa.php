@@ -1,3 +1,8 @@
+<html>
+<head>
+  <title>Busqueda</title>
+</head>
+<body>
 <?php
     
   function eliminar_tildes($cadena){
@@ -23,3 +28,5 @@
   echo "$palabra";
 
 ?>
+</body>
+</html>
