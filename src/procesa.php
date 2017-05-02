@@ -23,9 +23,19 @@
     die("Conexion a base de datos ha fallado: " . $conn -> connect_error);
   }
   
+  
   $palabra = eliminar_tildes($palabras);
-  echo "$palabra";
-
+  $query = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE word = ".$palabra;
+  $result = mysqli_query($conn, $query);
+  if(mysqli_num_rows($result)> 0)  {
+    while($row = mysqli_fetch_assoc($result)){
+      echo "Palabra: ".$palabra." - Documento: ".$row["document"].
+      " - Cantidad: ".$row["cantidad"]." - Idioma: ".$row["idioma"]."<br>";
+    }
+  }else{
+    echo "0 Resultados";
+  }
+  mysqli_close($conn);
 ?>
 </body>
 </html>
