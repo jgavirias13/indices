@@ -1,6 +1,6 @@
-#Indice Invertido
+# Indice Invertido
 
-##Autores
+## Autores
 Juan Pablo Gaviria
 David Alejandro Gomez
 
