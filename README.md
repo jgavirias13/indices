@@ -54,3 +54,16 @@ Ademas de esto, el programa contiene algoritmos que se encargan de la limpieza d
 El comando que se utilizo para la ejecución del Map Reduce fue:
 
 `python indice.py /var/www/gutenberg/es/*.txt -r hadoop --output-dir hdfs:///user/st0263/jgaviri6/salidaEs`
+
+### Carga de datos
+El proceso de carga consiste en preparar la salida del map reduce para exportar a MySQL y realizar el proceso de exportación. La salida del paso de transformación es formateada a traves del programa "parseo.py". Este programa se encarga de colocar cada registro en una linea y separar cada columna con una coma. Luego de tener en buen formato la salida, utilizamos Sqoop para exportar el archivo a MySQL.
+
+`python parseo.py -f archivoParser -n 0 -i es`
+
+`sqoop export --connect jdbc:mysql://10.131.137.188:3306/st0263 --username st0263 -P --table jgaviridgomez --export-dir /user/st0263/jgaviri6/out_dir`
+
+La tabla de MySQL almacena cada registro con los valores de id, palabra, documento, cantidad de apariciones y idioma en el que esta el documento.
+
+### Visualización de datos
+
+Para el despliegue de la aplicación utilizamos el servidor 10.131.135.150. En este se aloja una aplicación en PHP que, en base a las palabras que busca el usuario, realiza una consulta en la base de datos para obtener los documentos. Esta aplicación tambien realiza un proceso de limpieza a las palabras ingresadas por el usuario.
