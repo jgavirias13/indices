@@ -47,3 +47,10 @@ Como se explico en la sección diseño del sistema, los documentos se encuentran
 `hadoop fs -put /var/www/gutenberg/es/* /user/st0263/jgaviri6/data_in`
 
 Con la instrucción anterior se subian todos los documentos en español a hadoop, lo mismo se hizo con los documentos en ingles.
+
+### Transformación de datos
+Una ves los datos estan en hadoop se procede a ejecutar el programa en Python con Map Reduce que se encarga de realizar el indice invertido. Este programa esta compuesto por 1 mapper y 2 reducer. Como salida genera un listado de registros, cada uno con una palabra, un documento donde aparece y la cantidad de ocurrencias que tiene en ese documento. Este listado sirve para que, despues de un cambio de formato, pueda exportarse a la base de datos.
+Ademas de esto, el programa contiene algoritmos que se encargan de la limpieza de las cadenas, de tal forma que se cambien las mayusculas por minusculas, se quiten las tildes y se eliminen los caracteres especiales.
+El comando que se utilizo para la ejecución del Map Reduce fue:
+
+`python indice.py /var/www/gutenberg/es/*.txt -r hadoop --output-dir hdfs:///user/st0263/jgaviri6/salidaEs`
