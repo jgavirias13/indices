@@ -33,7 +33,7 @@
         echo "Error al ordenar";
       }
     }else{
-      echo "0 Resultados";
+      echo "0 Resultados en ".$idioma;
     }
   }
   //Crear conexion de mysql
