@@ -6,7 +6,8 @@ import string, re
 
 def eliminarTildes(cadena):
     s = ''.join((c for c in unicodedata.normalize('NFD',unicode(cadena)) if unicodedata.category(c) != 'Mn'))
-    return s
+    sinMayus = s.lower()
+    return sinMayus
 
 class Contador(MRJob):
     def mapper(self,name,line):
