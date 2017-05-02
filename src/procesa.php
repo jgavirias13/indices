@@ -62,10 +62,11 @@
       $querystring .= " or";
     }
   }
-  $querystring1 = querystring." and idioma = \"es\"";
+  $querystring1 = $querystring." and idioma = \"es\"";
   $result = mysqli_query($conn, $querystring1);
   sacar_documentos($result,"es");
-  $querystring2 = querystring." and idioma = \"en\"";
+  $querystring2 = $querystring." and idioma = \"en\"";
+  $result = mysqli_query($conn, $querystring2);
   sacar_documentos($result,"en");
   mysqli_close($conn);
 ?>
