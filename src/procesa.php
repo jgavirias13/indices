@@ -38,19 +38,25 @@
       $querystring .= " or";
     }
   }
-  echo $querystring;
-  $query = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE word = \"".$palabra."\" ORDER BY cantidad DESC";
-  $result = mysqli_query($conn, $query);
-  echo "Palabra: ".$palabra."<br>";
-  if(mysqli_num_rows($result)> 0)  {
+  $result = mysqli_query($conn, $querystring);
+  if(mysqli_num_rows($result) > 0) {
+    $documentos = array();
     while($row = mysqli_fetch_assoc($result)){
-      $link = "<a href=\"http://10.131.137.188/".$row["idioma"]."/".
-      $row["document"]."\">".$row["document"]."</a>";
-      echo " - Documento: ".$link." - Cantidad: ".$row["cantidad"].
-      " - Idioma: ".$row["idioma"]."<br>";
+      if(array_key_exists($row["document"],$documentos)){
+        $documento[$row["document"]] += 100000 + (int)$row["cantidad"];
+      }else{
+        $documento[$row["document"]] = 100000 + (int)$row["cantidad"];
+      }
+    }
+    if(arsort($documentos)){
+      foreach($documentos as $nombre => $val){
+        echo "Documento: ".$nombre." valor ".$val;
+      }
+    }else{
+      echo "Error al ordenar"
     }
   }else{
-    echo "0 Resultados";
+    echo "0 Resultados"
   }
   mysqli_close($conn);
 ?>
