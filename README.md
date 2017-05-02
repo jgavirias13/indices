@@ -8,12 +8,13 @@ David Alejandro Gomez
 
 ## Indice
 1. Diseño del sistema
-	1.1.   Herramientas usadas
-	1.2.   Algoritmos usados
+
+	1.1. Herramientas usadas
+	1.2. Algoritmos usados
 2. Proceso ETL
-	2.1.   Extracción de datos
-	2.2.   Transformación de datos
-	2.3.   Carga de datos
+	2.1. Extracción de datos
+	2.2. Transformación de datos
+	2.3. Carga de datos
 
 ## Diseño del sistema
 ![Diagrama del sistema](http://fotos.subefotos.com/7035e589f4d8d2e5636e07aad427bbe9o.png "Diagrama del sistema")
