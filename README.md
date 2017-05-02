@@ -43,5 +43,7 @@ Para cumplir con el objetivo de realizar una busqueda de palabras sobre una seri
 
 ### Extracción de datos
 Como se explico en la sección diseño del sistema, los documentos se encuentran en el servidor 10.131.137.188 y se cargaron en el sistema de archivos HDFS de Hadoop
+
 `hadoop fs -put /var/www/gutenberg/es/* /user/st0263/jgaviri6/data_in`
+
 Con la instrucción anterior se subian todos los documentos en español a hadoop, lo mismo se hizo con los documentos en ingles.
