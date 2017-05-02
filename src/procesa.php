@@ -12,6 +12,30 @@
     return $texto;
   }
   
+  function sacar_documentos($result, $idioma){
+      if(mysqli_num_rows($result) > 0) {
+      $documentos = array();
+      while($row = mysqli_fetch_assoc($result)){
+        if(array_key_exists($row["document"],$documentos)){
+          $documentos[$row["document"]] += 100000 + (int)$row["cantidad"];
+        }else{
+          $documentos[$row["document"]] = 100000 + (int)$row["cantidad"];
+        }
+      }
+      if(arsort($documentos)){
+        foreach($documentos as $key => $val){
+  	      $link = "<a href=\"http://10.131.137.188/".$idioma."/".$key."\">".$key."</a>";
+          $apariciones = (int)($val/100000);
+          $cantidad = (int)$val-$apariciones*100000;
+          echo "Documento: ".$link." Palabras: ".$apariciones." Ocurrencia: ".$cantidad." Idioma: ".$idioma."<br>";
+        }
+      }else{
+        echo "Error al ordenar";
+      }
+    }else{
+      echo "0 Resultados";
+    }
+  }
   //Crear conexion de mysql
   $servername = "10.131.137.188";
   $username = "st0263";
@@ -38,30 +62,11 @@
       $querystring .= " or";
     }
   }
-  $querystring .= " and idioma = \"es\"";
-  $result = mysqli_query($conn, $querystring);
-  if(mysqli_num_rows($result) > 0) {
-    $documentos = array();
-    while($row = mysqli_fetch_assoc($result)){
-      if(array_key_exists($row["document"],$documentos)){
-        $documentos[$row["document"]] += 100000 + (int)$row["cantidad"];
-      }else{
-        $documentos[$row["document"]] = 100000 + (int)$row["cantidad"];
-      }
-    }
-    if(arsort($documentos)){
-      foreach($documentos as $key => $val){
-	$link = "<a href=\"http://10.131.137.188/es/".$key."\">".$key."</a>";
-        $apariciones = (int)($val/100000);
-        $cantidad = (int)$val-$apariciones*100000;
-        echo "Documento: ".$link." Palabras: ".$apariciones." Ocurrencia: ".$cantidad." Idioma: Español<br>";
-      }
-    }else{
-      echo "Error al ordenar";
-    }
-  }else{
-    echo "0 Resultados";
-  }
+  $querystring1 = querystring." and idioma = \"es\"";
+  $result = mysqli_query($conn, $querystring1);
+  sacar_documentos($result,"es");
+  $querystring2 = querystring." and idioma = \"en\"";
+  sacar_documentos($result,"en");
   mysqli_close($conn);
 ?>
 </body>
