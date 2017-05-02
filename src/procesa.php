@@ -25,7 +25,7 @@
   
   
   $palabra = eliminar_tildes($palabras);
-  $query = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE word = ".$palabra;
+  $query = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE word = \"".$palabra."\"";
   $result = mysqli_query($conn, $query);
   if(mysqli_num_rows($result)> 0)  {
     while($row = mysqli_fetch_assoc($result)){
