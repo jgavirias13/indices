@@ -27,10 +27,13 @@
   $palabra = eliminar_tildes($palabras);
   $query = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE word = \"".$palabra."\"";
   $result = mysqli_query($conn, $query);
+  echo "Palabra: ".$palabra."<br>";
   if(mysqli_num_rows($result)> 0)  {
     while($row = mysqli_fetch_assoc($result)){
-      echo "Palabra: ".$palabra." - Documento: ".$row["document"].
-      " - Cantidad: ".$row["cantidad"]." - Idioma: ".$row["idioma"]."<br>";
+      $link = "<a href=\"http://10.131.137.188/".$row["idioma"]."/".
+      $row["document"]."\">".$row["document"]."</a>";
+      echo " - Documento: ".$link." - Cantidad: ".$row["cantidad"].
+      " - Idioma: ".$row["idioma"]."<br>";
     }
   }else{
     echo "0 Resultados";
