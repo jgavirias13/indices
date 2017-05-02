@@ -38,25 +38,29 @@
       $querystring .= " or";
     }
   }
+  $querystring .= " and idioma = \"es\"";
   $result = mysqli_query($conn, $querystring);
   if(mysqli_num_rows($result) > 0) {
     $documentos = array();
     while($row = mysqli_fetch_assoc($result)){
       if(array_key_exists($row["document"],$documentos)){
-        $documento[$row["document"]] += 100000 + (int)$row["cantidad"];
+        $documentos[$row["document"]] += 100000 + (int)$row["cantidad"];
       }else{
-        $documento[$row["document"]] = 100000 + (int)$row["cantidad"];
+        $documentos[$row["document"]] = 100000 + (int)$row["cantidad"];
       }
     }
     if(arsort($documentos)){
-      foreach($documentos as $nombre => $val){
-        echo "Documento: ".$nombre." valor ".$val;
+      foreach($documentos as $key => $val){
+	$link = "<a href=\"http://10.131.137.188/es/".$key."\">".$key."</a>";
+        $apariciones = (int)($val/100000);
+        $cantidad = (int)$val-$apariciones*100000;
+        echo "Documento: ".$link." Palabras: ".$apariciones." Ocurrencia: ".$cantidad." Idioma: Español<br>";
       }
     }else{
-      echo "Error al ordenar"
+      echo "Error al ordenar";
     }
   }else{
-    echo "0 Resultados"
+    echo "0 Resultados";
   }
   mysqli_close($conn);
 ?>
