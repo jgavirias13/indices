@@ -27,8 +27,6 @@ class Contador(MRJob):
     def reducer2(self, word, doc):
         l = list(doc)
         documentos = sorted(l)
-        if len(documentos) > 5:
-            documentos = [l[0],l[1],l[2],l[3],l[4]]
         for documento in documentos:
             yield word,documento
     
