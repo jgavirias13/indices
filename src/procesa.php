@@ -33,7 +33,7 @@
             $apariciones = (int)($val/100000);
             $cantidad = (int)$val-$apariciones*100000;
             echo "Documento: ".$link." Palabras: ".$palabras[$key]." Ocurrencia: ".$cantidad." Idioma: ".$idioma."<br>";
-            i++;
+            i+=1;
           }
         }
       }else{
