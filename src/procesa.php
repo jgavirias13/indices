@@ -13,7 +13,13 @@
   }
   
   function sacar_documentos($result, $idioma){
-      if(mysqli_num_rows($result) > 0) {
+    if($idioma = "es"){
+      echo "<h3>Español:</h3>"
+    }else if($idioma = "en"){
+      echo "<h3>Ingles:</h3>"
+    }
+    echo "<p>"
+    if(mysqli_num_rows($result) > 0) {
       $documentos = array();
       $palabras = array();
       while($row = mysqli_fetch_assoc($result)){
@@ -40,8 +46,9 @@
         echo "Error al ordenar";
       }
     }else{
-      echo "0 Resultados en ".$idioma;
+      echo "0 Resultados";
     }
+    echo "</p>"
   }
   //Crear conexion de mysql
   $servername = "10.131.137.188";
