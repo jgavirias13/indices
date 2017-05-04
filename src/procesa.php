@@ -3,6 +3,11 @@
   <title>Busqueda</title>
 </head>
 <body>
+    <form method="GET" action="procesa.php">
+        <input type="text" name="palabra" />
+        <input type="submit" value="Buscar"/>
+    </form>
+
 <?php
   $palabras = $_GET["palabra"];  
   function eliminar_tildes($cadena){
@@ -13,9 +18,9 @@
   }
   
   function sacar_documentos($result, $idioma){
-    if($idioma = "es"){
+    if($idioma == "es"){
       echo "<h3>Español:</h3>";
-    }else if($idioma = "en"){
+    }else if($idioma == "en"){
       echo "<h3>Ingles:</h3>";
     }
     echo "<p>";
@@ -33,15 +38,17 @@
       }
       if(arsort($documentos)){
         $i=0;
+	echo "<ul>";
         foreach($documentos as $key => $val){
           if($i<5){
-    	      $link = "<a href=\"http://10.131.137.188/".$idioma."/".$key."\">".$key."</a>";
+    	    $link = "<a href=\"http://10.131.137.188/".$idioma."/".$key."\">".$key."</a>";
             $apariciones = (int)($val/100000);
             $cantidad = (int)$val-$apariciones*100000;
-            echo "Documento: ".$link." Palabras: ".$palabras[$key]." Ocurrencia: ".$cantidad." Idioma: ".$idioma."<br>";
+            echo "<li><b>Documento:</b> ".$link.", <b>Palabras:</b> ".$palabras[$key]."<b> Ocurrencia:</b> ".$cantidad."</li>";
             $i++;
           }
         }
+	echo "</ul>";
       }else{
         echo "Error al ordenar";
       }

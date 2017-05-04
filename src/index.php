@@ -3,9 +3,8 @@
 </head>
 <body>
     <form method="GET" action="procesa.php">
-        Buscar: <input type="text" name="palabra" />
-        <br />
-        <input type="submit" value="Iniciar busqueda"/>
+        <input type="text" name="palabra" />
+        <input type="submit" value="Buscar"/>
     </form>
 </body>
 </html>
