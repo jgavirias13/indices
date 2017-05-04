@@ -14,11 +14,11 @@
   
   function sacar_documentos($result, $idioma){
     if($idioma = "es"){
-      echo "<h3>Español:</h3>"
+      echo "<h3>Español:</h3>";
     }else if($idioma = "en"){
-      echo "<h3>Ingles:</h3>"
+      echo "<h3>Ingles:</h3>";
     }
-    echo "<p>"
+    echo "<p>";
     if(mysqli_num_rows($result) > 0) {
       $documentos = array();
       $palabras = array();
@@ -48,7 +48,7 @@
     }else{
       echo "0 Resultados";
     }
-    echo "</p>"
+    echo "</p>";
   }
   //Crear conexion de mysql
   $servername = "10.131.137.188";
