@@ -15,19 +15,26 @@
   function sacar_documentos($result, $idioma){
       if(mysqli_num_rows($result) > 0) {
       $documentos = array();
+      $palabras = array();
       while($row = mysqli_fetch_assoc($result)){
         if(array_key_exists($row["document"],$documentos)){
           $documentos[$row["document"]] += 100000 + (int)$row["cantidad"];
+          $palabras[$row["document"]] .= $row["word"].", ";
         }else{
           $documentos[$row["document"]] = 100000 + (int)$row["cantidad"];
+          $palabras[$row["document"]] = $row["word"].", ";
         }
       }
       if(arsort($documentos)){
+        $i=0;
         foreach($documentos as $key => $val){
-  	      $link = "<a href=\"http://10.131.137.188/".$idioma."/".$key."\">".$key."</a>";
-          $apariciones = (int)($val/100000);
-          $cantidad = (int)$val-$apariciones*100000;
-          echo "Documento: ".$link." Palabras: ".$apariciones." Ocurrencia: ".$cantidad." Idioma: ".$idioma."<br>";
+          if(i<5){
+    	      $link = "<a href=\"http://10.131.137.188/".$idioma."/".$key."\">".$key."</a>";
+            $apariciones = (int)($val/100000);
+            $cantidad = (int)$val-$apariciones*100000;
+            echo "Documento: ".$link." Palabras: ".$palabras[$key]." Ocurrencia: ".$cantidad." Idioma: ".$idioma."<br>";
+            i++;
+          }
         }
       }else{
         echo "Error al ordenar";
@@ -54,7 +61,7 @@
   
   $palabra = eliminar_tildes($palabras);
   $palabraArray = separar_palabras($palabra); 
-  $querystring = "SELECT document,cantidad,idioma FROM st0263.jgaviridgomez WHERE ("; 
+  $querystring = "SELECT word, document,cantidad,idioma FROM st0263.jgaviridgomez WHERE ("; 
   $tamano = count($palabraArray);
   for($i=0;$i<$tamano;$i++){
     $querystring .= " word = \"".$palabraArray[$i]."\"";
