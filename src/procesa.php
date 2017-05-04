@@ -28,12 +28,12 @@
       if(arsort($documentos)){
         $i=0;
         foreach($documentos as $key => $val){
-          if(i<5){
+          if($i<5){
     	      $link = "<a href=\"http://10.131.137.188/".$idioma."/".$key."\">".$key."</a>";
             $apariciones = (int)($val/100000);
             $cantidad = (int)$val-$apariciones*100000;
             echo "Documento: ".$link." Palabras: ".$palabras[$key]." Ocurrencia: ".$cantidad." Idioma: ".$idioma."<br>";
-            i+=1;
+            $i++;
           }
         }
       }else{
